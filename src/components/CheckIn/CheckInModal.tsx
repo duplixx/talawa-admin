@@ -28,25 +28,44 @@ export const CheckInModal = (props: InterfaceModalProp): JSX.Element => {
   } = useQuery(EVENT_CHECKINS, {
     variables: { id: props.eventId },
   });
-
   useEffect(() => {
-    if (checkInLoading) setTableData([]);
-    else
-      setTableData(
-        checkInData.event.attendeesCheckInStatus.map(
-          (checkIn: InterfaceAttendeeCheckIn) => ({
-            userName: `${checkIn.user.firstName} ${checkIn.user.lastName}`,
-            id: checkIn._id,
-            checkInData: {
+    let isMounted = true;
+
+    const fetchData = async (): Promise<void> => {
+      try {
+        if (checkInLoading) {
+          if (isMounted) {
+            setTableData([]);
+          }
+        } else {
+          const newData = checkInData.event.attendeesCheckInStatus.map(
+            (checkIn: InterfaceAttendeeCheckIn) => ({
+              userName: `${checkIn.user.firstName} ${checkIn.user.lastName}`,
               id: checkIn._id,
-              name: `${checkIn.user.firstName} ${checkIn.user.lastName}`,
-              userId: checkIn.user._id,
-              checkIn: checkIn.checkIn,
-              eventId: props.eventId,
-            },
-          })
-        )
-      );
+              checkInData: {
+                id: checkIn._id,
+                name: `${checkIn.user.firstName} ${checkIn.user.lastName}`,
+                userId: checkIn.user._id,
+                checkIn: checkIn.checkIn,
+                eventId: props.eventId,
+              },
+            })
+          );
+
+          if (isMounted) {
+            setTableData(newData);
+          }
+        }
+      } catch (error) {
+        // Handle errors
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      isMounted = false;
+    };
   }, [checkInData, props.eventId, checkInLoading]);
 
   const columns: GridColDef[] = [
