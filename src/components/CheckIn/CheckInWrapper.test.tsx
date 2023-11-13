@@ -18,7 +18,7 @@ describe('Testing CheckIn Wrapper', () => {
   };
 
   test('The button to open and close the modal should work properly', async () => {
-    const { queryByText } = render(
+    const { queryByText, queryByRole } = render(
       <MockedProvider addTypename={false} mocks={checkInQueryMock}>
         <BrowserRouter>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -40,16 +40,9 @@ describe('Testing CheckIn Wrapper', () => {
       expect(queryByText('Event Check In Management')).toBeInTheDocument()
     );
 
-    /* 
-    TODO 
-    The following test of closing the modal should be uncommented when the memory leak issue of MUI Data Grid is fixed.
-
-    It will consequently ensure 100% coverage of the file. 
-    */
-    // Close the modal
-    // fireEvent.click(queryByRole('button', { name: /close/i }) as HTMLElement);
-    // await waitFor(() =>
-    //   expect(queryByText('Event Check In Management')).not.toBeInTheDocument()
-    // );
+    fireEvent.click(queryByRole('button', { name: /close/i }) as HTMLElement);
+    await waitFor(() =>
+      expect(queryByText('Event Check In Management')).not.toBeInTheDocument()
+    );
   });
 });
