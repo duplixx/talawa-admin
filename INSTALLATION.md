@@ -4,7 +4,7 @@ This document provides instructions on how to set up and start a running instanc
 
 # Table of Contents
 
-- [Talawa-Admin Installation](#talawa-admin-installation)
+- [Talawa-Admin Installation](# talawa-admin-installation)
 - [Table of Contents](#table-of-contents)
 - [Prerequisites for Developers](#prerequisites-for-developers)
 - [Installation](#installation)
