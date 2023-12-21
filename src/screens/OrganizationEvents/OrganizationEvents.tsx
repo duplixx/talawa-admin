@@ -77,7 +77,9 @@ function organizationEvents(): JSX.Element {
   const userId = localStorage.getItem('id') as string;
   const userRole = localStorage.getItem('UserType') as string;
 
-  const [create, { loading: loading2 }] = useMutation(CREATE_EVENT_MUTATION);
+  const [create, { loading: loading_2, error }] = useMutation(
+    CREATE_EVENT_MUTATION
+  );
 
   const createEvent = async (
     e: ChangeEvent<HTMLFormElement>
