@@ -174,16 +174,6 @@ const Calendar: React.FC<InterfaceCalendarProps> = ({
       );
     }
 
-    return days.map((date, index) => {
-      const className = [
-        date.toLocaleDateString() === today.toLocaleDateString() //Styling for today day cell
-          ? styles.day__today
-          : '',
-        date.getMonth() !== currentMonth ? styles.day__outside : '', //Styling for days outside the current month
-        selectedDate?.getTime() === date.getTime() ? styles.day__selected : '',
-        styles.day,
-      ].join(' ');
-
       const toggleExpand = (index: number): void => {
         if (expanded === index) {
           setExpanded(-1);
