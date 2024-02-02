@@ -15,9 +15,9 @@ async function checkConnection(url: string): Promise<any> {
       console.log('\nConnection to Talawa-API successful! 🎉');
     })
     .catch(() => {
-      console.log(
-        '\nTalawa-API service is unavailable. Is it running? Check your network connectivity too.'
-      );
+      // console.log(
+      //   '\nTalawa-API service is unavailable. Is it running? Check your network connectivity too.'
+      // );
     });
   return isConnected;
 }
