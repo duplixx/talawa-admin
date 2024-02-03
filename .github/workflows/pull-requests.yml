@@ -49,14 +49,21 @@ jobs:
             'setup.ts'
           )
           
+          UNAUTHORIZED_CHANGES=false
+
           for file in $(git diff --name-only ${{ github.event.before || github.sha }}); do
             for sensitive_file in "${SENSITIVE_FILES[@]}"; do
               if [[ "$file" == "$sensitive_file"* ]]; then
                 echo " - $file"
-                exit 1
+                UNAUTHORIZED_CHANGES=true
               fi
             done
           done
+
+          if [ "$UNAUTHORIZED_CHANGES" == true ]; then
+            echo "Unauthorized changes detected. Please review the list of modified files above."
+            exit 1
+          fi
 
   Code-Quality-Checks:
     name: Performs linting, formatting, type-checking
