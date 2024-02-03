@@ -50,8 +50,9 @@ jobs:
           )
           
           UNAUTHORIZED_CHANGES=false
+          
 
-          for file in $(git diff --name-only ${{ github.event.before || github.sha }}); do
+          for file in $(git diff --name-only ${{ github.event.before || github.sha || "HEAD^" }}); do
             for sensitive_file in "${SENSITIVE_FILES[@]}"; do
               if [[ "$file" == "$sensitive_file"* ]]; then
                 echo " - $file"
