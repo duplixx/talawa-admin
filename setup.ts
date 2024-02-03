@@ -110,9 +110,9 @@ async function main(): Promise<void> {
   let shouldSetTalawaApiUrl: boolean;
 
   if (process.env.REACT_APP_TALAWA_URL) {
-    console.log(
-      `\nEndpoint for accessing talawa-api graphql service already exists with the value:\n${process.env.REACT_APP_TALAWA_URL}`
-    );
+    // console.log(
+    //   `\nEndpoint for accessing talawa-api graphql service already exists with the value:\n${process.env.REACT_APP_TALAWA_URL}`
+    // );
     shouldSetTalawaApiUrl = true;
   } else {
     const { shouldSetTalawaApiUrlResponse } = await inquirer.prompt({
