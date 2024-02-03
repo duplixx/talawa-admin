@@ -27,43 +27,10 @@ jobs:
       - name: Checkout the Repository
         uses: actions/checkout@v3
 
-      - name: Check for unauthorized file modification
+      - name: Unauthorized file modification in PR
         run: |
-          echo "List of unauthorized files changed:"
-          # Add your list of sensitive files and directories here
-          SENSITIVE_FILES=(
-            '.github/'
-            'env.example'
-            '.husky/'
-            'scripts/'
-            'package.json'
-            'tsconfig.json'
-            '.gitignore'
-            '.eslintrc.json'
-            '.eslintignore'
-            'vite.config.ts'
-            'docker-compose.yaml'
-            'Dockerfile'
-            'CODEOWNERS'
-            'LICENSE'
-            'setup.ts'
-          )
-          
-          UNAUTHORIZED_CHANGES=false
-
-          for file in $(git diff --name-only ${{ github.event.before || "HEAD^" }}); do
-            for sensitive_file in "${SENSITIVE_FILES[@]}"; do
-              if [[ "$file" == "$sensitive_file"* ]]; then
-                echo " - $file"
-                UNAUTHORIZED_CHANGES=true
-              fi
-            done
-          done
-
-          if [ "$UNAUTHORIZED_CHANGES" == true ]; then
-            echo "Unauthorized changes detected. Please review the list of modified files above."
-            exit 1
-          fi
+          chmod +x ./.github/workflows/authorized-changes-detection.sh
+          ./.github/workflows/authorized-changes-detection.sh
 
   Code-Quality-Checks:
     name: Performs linting, formatting, type-checking
