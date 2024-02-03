@@ -10,14 +10,14 @@ async function checkConnection(url: string): Promise<any> {
   console.log('\nChecking Talawa-API connection....');
   let isConnected = false;
   await fetch(url)
-    // .then(() => {
-    //   isConnected = true;
-    //   console.log('\nConnection to Talawa-API successful! 🎉');
-    // })
+    .then(() => {
+      isConnected = true;
+      console.log('\nConnection to Talawa-API successful! 🎉');
+    })
     .catch(() => {
-      // console.log(
-      //   '\nTalawa-API service is unavailable. Is it running? Check your network connectivity too.'
-      // );
+      console.log(
+        '\nTalawa-API service is unavailable. Is it running? Check your network connectivity too.'
+      );
     });
   return isConnected;
 }
@@ -110,9 +110,9 @@ async function main(): Promise<void> {
   let shouldSetTalawaApiUrl: boolean;
 
   if (process.env.REACT_APP_TALAWA_URL) {
-    console.log(
-      `\nEndpoint for accessing talawa-api graphql service already exists with the value:\n${process.env.REACT_APP_TALAWA_URL}`
-    );
+    // console.log(
+    //   `\nEndpoint for accessing talawa-api graphql service already exists with the value:\n${process.env.REACT_APP_TALAWA_URL}`
+    // );
     shouldSetTalawaApiUrl = true;
   } else {
     const { shouldSetTalawaApiUrlResponse } = await inquirer.prompt({
