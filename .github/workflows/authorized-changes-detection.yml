@@ -1,3 +1,14 @@
+##############################################################################
+##############################################################################
+#
+# NOTE!
+#
+# Please read the README.md file in this directory that defines what should 
+# be placed in this file
+#
+##############################################################################
+##############################################################################
+
 name: Checking workflow files
 on:
   pull_request:
@@ -10,26 +21,18 @@ on:
       - 'tsconfig.json'
       - '.gitignore'
       - '.eslintrc.json'
-      - '.eslintignore'
+      - '.eslintignore '
       - 'vite.config.ts'
       - 'docker-compose.yaml'
       - 'Dockerfile'      
       - 'CODEOWNERS'
       - 'LICENSE'
       - 'setup.ts'
-
+      
 jobs:
   Checking-for-unauthorized-file-changes:
     name: Checking for unauthorized file changes
     runs-on: ubuntu-latest
     steps:
-      - name: Check for unauthorized file modification
-        id: check_changes
-        run: |
-          echo "List of unauthorized files changed:"
-          git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '^('.github/|env.example|.husky/|scripts/|package.json|tsconfig.json|.gitignore|.eslintrc.json|.eslintignore|vite.config.ts|docker-compose.yaml|Dockerfile|CODEOWNERS|LICENSE|setup.ts')$' || true
-          
-          # If there are unauthorized changes, exit with an error
-          if [ -n "$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '^('.github/|env.example|.husky/|scripts/|package.json|tsconfig.json|.gitignore|.eslintrc.json|.eslintignore|vite.config.ts|docker-compose.yaml|Dockerfile|CODEOWNERS|LICENSE|setup.ts')$')" ]; then
-            exit 1
-          fi
+      - name: Unauthorized file modification in PR
+        run: exit 1
