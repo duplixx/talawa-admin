@@ -1,4 +1,5 @@
 <!--
+test minor commit 
 This section can be deleted after reading.
 
 We employ the following branching strategy to simplify the development process and to ensure that only stable code is pushed to the `master` branch:
