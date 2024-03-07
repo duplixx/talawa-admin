@@ -4,7 +4,7 @@ import OrganizationNavbar from 'components/UserPortal/OrganizationNavbar/Organiz
 import OrganizationSidebar from 'components/UserPortal/OrganizationSidebar/OrganizationSidebar';
 import EventCard from 'components/UserPortal/EventCard/EventCard';
 import UserSidebar from 'components/UserPortal/UserSidebar/UserSidebar';
-import { Button, Dropdown, Form, InputGroup } from 'react-bootstrap';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 import PaginationList from 'components/PaginationList/PaginationList';
 import {
   ORGANIZATION_EVENTS_CONNECTION,
@@ -80,7 +80,7 @@ export default function events(): JSX.Element {
 
   const organizationId = getOrganizationId(window.location.href);
 
-  const modes = [t('listView'), t('calendarView')];
+  // const modes = [t('listView'), t('calendarView')];
 
   const { data, loading, refetch } = useQuery(ORGANIZATION_EVENTS_CONNECTION, {
     variables: {
@@ -235,37 +235,6 @@ export default function events(): JSX.Element {
                 <SearchOutlined className={`${styles.colorWhite}`} />
               </InputGroup.Text>
             </InputGroup>
-            <div className={styles.eventActionsContainer}>
-              <Button
-                onClick={toggleCreateEventModal}
-                data-testid={`createEventModalBtn`}
-              >
-                {t('createEvent')}
-              </Button>
-              <Dropdown drop="down-centered">
-                <Dropdown.Toggle
-                  className={`${styles.colorPrimary} ${styles.borderNone}`}
-                  variant="success"
-                  id="dropdown-basic"
-                  data-testid={`modeChangeBtn`}
-                >
-                  {modes[mode]}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  {modes.map((value, index) => {
-                    return (
-                      <Dropdown.Item
-                        key={index}
-                        data-testid={`modeBtn${index}`}
-                        onClick={(): void => setMode(index)}
-                      >
-                        {value}
-                      </Dropdown.Item>
-                    );
-                  })}
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
           </div>
           {mode === 0 && (
             <div

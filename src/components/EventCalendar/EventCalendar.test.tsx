@@ -4,6 +4,7 @@ import { MockedProvider } from '@apollo/react-testing';
 import { I18nextProvider } from 'react-i18next';
 import { debug } from 'jest-preview';
 import React from 'react';
+import { ViewType } from 'screens/OrganizationEvents/OrganizationEvents';
 
 import {
   DELETE_EVENT_MUTATION,
@@ -27,6 +28,7 @@ const eventData = [
     recurring: false,
     isPublic: true,
     isRegisterable: true,
+    viewType: ViewType.DAY,
   },
   {
     _id: '2',

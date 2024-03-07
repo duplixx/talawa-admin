@@ -239,7 +239,7 @@
     "talawaApiUnavailable": "Talawa-API service is unavailable. Is it running? Check your network connectivity too."
   },
   "organizationEvents": {
-    "title": "Talawa Events",
+    "title": "Events",
     "filterByTitle": "Filter by Title",
     "filterByLocation": "Filter by Location",
     "filterByDescription": "Filter by Description",
