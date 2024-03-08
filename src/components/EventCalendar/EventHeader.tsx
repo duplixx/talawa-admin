@@ -15,7 +15,7 @@ function eventHeader({
   handleChangeView,
   showInviteModal,
 }: InterfaceEventHeaderProps): JSX.Element {
-  const [fullName, setFullName] = useState('');
+  const [eventName, setEventName] = useState('');
 
   return (
     <div className={styles.calendar}>
@@ -23,13 +23,13 @@ function eventHeader({
         <div className={styles.input}>
           <Form.Control
             type="text"
-            id="searchLastName"
+            id="searchEvent"
             placeholder="Search Event Name"
             autoComplete="off"
             required
             className={styles.inputField}
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            value={eventName}
+            onChange={(e) => setEventName(e.target.value)}
           />
           <Button
             className={`position-absolute z-10 bottom-0 end-0 d-flex justify-content-center align-items-center `}
@@ -59,7 +59,7 @@ function eventHeader({
             </Dropdown>
           </div>
           <div>
-            <Dropdown onSelect={handleChangeView} className={styles.selectType}>
+            <Dropdown className={styles.selectType}>
               <Dropdown.Toggle id="dropdown-basic" className={styles.dropdown}>
                 Event Type
               </Dropdown.Toggle>
@@ -77,7 +77,7 @@ function eventHeader({
             variant="success"
             className={styles.addbtn}
             onClick={showInviteModal}
-            data-testid="createEventModalBtn"
+            data-testid="createEventModal"
           >
             Create Event
           </Button>
