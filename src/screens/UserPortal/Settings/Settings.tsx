@@ -93,6 +93,7 @@ export default function settings(): JSX.Element {
    */
   /*istanbul ignore next*/
   const handleUpdateUserDetails = async (): Promise<void> => {
+    /*istanbul ignore next*/
     try {
       let updatedUserDetails = { ...userDetails };
       if (updatedUserDetails.image === originalImageState.current) {
